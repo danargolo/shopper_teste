@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
+import "./styles.css";
 
 interface FormDataInterface {
   userId: string;
@@ -37,7 +38,7 @@ export const TravelForms = (): React.JSX.Element => {
           />
         </div>
         <div>
-          <label htmlFor="origin">Origin Address</label>
+          <label htmlFor="origin">Origin</label>
           <input
             type="text"
             id="origin"
@@ -50,7 +51,7 @@ export const TravelForms = (): React.JSX.Element => {
           />
         </div>
         <div>
-          <label htmlFor="destination">Destination Address</label>
+          <label htmlFor="destination">Destination</label>
           <input
             type="text"
             id="destination"
