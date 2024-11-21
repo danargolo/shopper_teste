@@ -24,7 +24,7 @@ form {
   color: #1F2937;
 }
 
-.containerFormTravel {
+.form-travel-container {
   width: 842.4px;
   height: 366px;
   background-color: #FFFFFF;
@@ -34,7 +34,7 @@ form {
 
 }
 
-.inputTravel {
+.input-travel {
   margin-top: 0.25rem;
   display: block;
   width: 100%;
