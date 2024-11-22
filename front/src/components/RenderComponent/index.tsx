@@ -1,4 +1,5 @@
 import { useRenderContext } from "../../context/renderContext"
+import { Loader } from "../Loader";
 import { TravelForms } from "../TravelForms";
 import { TravelHistory } from "../TravelHistory";
 import { TravelOptions } from "../TravelOptions";
@@ -11,9 +12,9 @@ const objectMapComponents: { [key: string]: JSX.Element } = {
 }
 
 export const RenderComponent = () => {
-  const { currentRender } = useRenderContext();
+  const { currentRender, isLoading } = useRenderContext();
 
   return (
-    objectMapComponents[currentRender]
+    isLoading ? <Loader /> : objectMapComponents[currentRender]
   )
 }

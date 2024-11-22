@@ -1,5 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, MouseEventHandler, useState } from "react";
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
+import { useRenderContext } from "../../context/renderContext";
 
 interface FormDataInterface {
   userId: string;
@@ -8,6 +10,8 @@ interface FormDataInterface {
 }
 
 export const TravelForms = (): React.JSX.Element => {
+  const { setCurrentRender, setIsLoading } = useRenderContext();
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState<FormDataInterface>({
     userId: "",
     origin: "",
@@ -19,6 +23,14 @@ export const TravelForms = (): React.JSX.Element => {
 
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleClick = () => {
+    setIsLoading(true);
+
+    setTimeout(() => setIsLoading(false), 2000)
+
+    setCurrentRender('options')
+  }
 
   return (
     <div className="form-travel-container">
@@ -66,6 +78,7 @@ export const TravelForms = (): React.JSX.Element => {
         <button
           type="submit"
           className="formTravelBtn"
+          onClick={handleClick}
           aria-label="Estimate Travel Cost"
         >
           Estimar Valor da Viagem

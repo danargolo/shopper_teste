@@ -1,15 +1,13 @@
 import "./App.css";
-import { TravelHistory } from "./components/TravelHistory";
-import { TravelForms } from "./components/TravelForms";
-import { TravelOptions } from "./components/TravelOptions";
-import { Route, Routes } from "react-router-dom";
 import { Header } from "./components/Header";
 import { RenderComponent } from "./components/RenderComponent";
+import { Loader } from "./components/Loader";
 
 function App() {
   return (
     <>
       <Header />
+      {/* <Loader /> */}
       <RenderComponent />
       {/* <Routes>
         <Route path="/" element={<TravelForms />} />

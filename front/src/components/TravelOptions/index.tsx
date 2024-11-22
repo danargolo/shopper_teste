@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import { useRenderContext } from '../../context/renderContext';
 
 interface DriversInterface {
   id: number;
@@ -60,6 +62,17 @@ const mockDrivers: DriversInterface[] = [
 ];
 
 export const TravelOptions = (): React.JSX.Element => {
+  // const navigate = useNavigate();
+  const { setCurrentRender, setIsLoading } = useRenderContext();
+
+  
+  const handleClick = () => {
+    setIsLoading(true);
+
+    setTimeout(() => setIsLoading(false), 2000)
+
+    setCurrentRender('history')
+  }
 
   return (
     <div className="drivers-options">
@@ -84,7 +97,12 @@ export const TravelOptions = (): React.JSX.Element => {
             </div>
             <div className="container-value">
               <p className="card-value">{driver.value}</p>
-              <button className="card-btn">Escolher</button>
+              <button 
+                className="card-btn"
+                onClick={ handleClick }
+              >
+                  Escolher
+              </button>
             </div>
           </div>
         ))
