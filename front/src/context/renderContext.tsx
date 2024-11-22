@@ -1,6 +1,11 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from "react";
 
-const RenderContext = createContext({});
+interface RenderContextInterface {
+  currentRender: string;
+  setCurrentRender: (value: string) => void;
+}
+
+const RenderContext = createContext<RenderContextInterface | undefined>(undefined);
 
 export const RenderProvider = ({children}: { children: ReactNode }) => {
   const [ currentRender, setCurrentRender ] = useState('forms');
