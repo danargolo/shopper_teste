@@ -21,8 +21,7 @@ const createTables = async () => {
         rating INT NOT NULL,
         comment VARCHAR(255) NOT NULL,
         driver_id INT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (driver_id) REFERENCES drivers(id)
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `;
 

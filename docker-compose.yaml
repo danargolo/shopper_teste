@@ -39,9 +39,9 @@ services:
         condition: service_healthy
         restart: true
     command: >
-      bash -c "
-      npm run table
-      npm run seed:drivers &&
+      sh -c "
+      npm run table &&
+      npm run seed &&
       npm run seed:reviews &&
       npm start
       "
