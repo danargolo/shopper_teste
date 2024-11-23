@@ -1,13 +1,11 @@
-FROM node:22.11.0
+FROM node:22.11.0-alpine3.20
 
 WORKDIR /app
 
-COPY package*.json ./
+RUN apk update && apk add --no-cache bash curl
 
-RUN npm install
+COPY package*.json ./
 
 COPY . .
 
 EXPOSE 8080
-
-CMD ["npm", "start"]

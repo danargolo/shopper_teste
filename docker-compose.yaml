@@ -40,6 +40,7 @@ services:
         restart: true
     command: >
       sh -c "
+      npm install &&
       npm run table &&
       npm run seed &&
       npm run seed:reviews
@@ -59,7 +60,7 @@ services:
     depends_on:
       back:
         condition: service_started
-    # command: sh -c "npm install && npm run dev"
+    command: sh -c "npm install && npm run dev"
     networks:
       - db-network
 
