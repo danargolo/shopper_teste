@@ -12,8 +12,8 @@ services:
       MYSQL_DATABASE: travels_db
       MYSQL_USER: travel
       MYSQL_PASSWORD: travel
-    volumes:
-      - data:/data/db_shopper
+    # volumes:
+    #   - data:/data/db_shopper
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
       interval: 30s
@@ -38,7 +38,13 @@ services:
       db:
         condition: service_healthy
         restart: true
-    command: npm start
+    command: >
+      bash -c "
+      npm run table
+      npm run seed:drivers &&
+      npm run seed:reviews &&
+      npm start
+      "
     networks:
       - db-network
 
