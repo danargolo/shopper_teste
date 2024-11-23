@@ -26,7 +26,7 @@ export const getConnection = async (): Promise<mysql.PoolConnection> => {
 export const closeConnection = async (): Promise<void> => {
   try {
     await pool.end();
-    console.log('Pool de conexões encerrado.');
+    console.log('Conexão encerrada.');
   } catch (error) {
     console.error('Erro ao encerrar o pool de conexões:', error);
     throw error;

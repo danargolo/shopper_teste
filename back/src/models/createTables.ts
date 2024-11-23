@@ -49,7 +49,7 @@ const createTables = async () => {
     console.log('Tabela "rides" criada com sucesso.');
 
     await closeConnection();
-    console.log('Conexão encerrada após criar tabelas.');
+
   } catch (error) {
     console.error('Erro ao criar tabelas:', error);
   }
