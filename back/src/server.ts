@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
 import app from './app.ts';
-import { dbConfig } from './config/dbConfig.ts';
+import { dbConfig } from './config/dbManagerConnection.ts';
 
 export const createConnection = async () => {
   try {

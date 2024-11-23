@@ -1,8 +1,8 @@
-FROM node:22.11.0-alpine3.20
+FROM node:22.11.0
 
 WORKDIR /app
 
-RUN apk update && apk add --no-cache bash curl
+RUN apt-get update && apt-get install -y
 
 COPY package*.json ./
 

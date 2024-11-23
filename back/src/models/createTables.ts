@@ -1,9 +1,8 @@
-import mysql from 'mysql2/promise';
-import { dbConfig } from '../config/dbConfig.ts';
+import { closeConnection, getConnection } from '../config/dbManagerConnection.ts';
 
 const createTables = async () => {
   try {
-    const connection = await mysql.createConnection(dbConfig);
+    const connection = await getConnection();
 
     const createDriversTable = `
       CREATE TABLE IF NOT EXISTS drivers (
@@ -49,17 +48,11 @@ const createTables = async () => {
     await connection.execute(createRidersTable);
     console.log('Tabela "rides" criada com sucesso.');
 
-    await connection.end();
+    await closeConnection();
     console.log('Conexão encerrada após criar tabelas.');
   } catch (error) {
     console.error('Erro ao criar tabelas:', error);
   }
 };
 
-// Inicializa a criação das tabelas de forma independente
-const initializeDatabase = async () => {
-  console.log('Iniciando a criação das tabelas...');
-  await createTables();
-};
-
-initializeDatabase();
+createTables();

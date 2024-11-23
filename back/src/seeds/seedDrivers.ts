@@ -1,5 +1,4 @@
-import mysql from 'mysql2/promise';
-import { dbConfig } from "../config/dbConfig.ts";
+import { getConnection, closeConnection } from "../config/dbManagerConnection.ts";
 import { Drivers } from './seedData.ts';
 import { DriversInterface } from '../interfaces/interfaces.ts';
 
@@ -22,7 +21,7 @@ const generateDriversQuery = (drivers: DriversInterface[] ) => {
 const driversInsertQuery = generateDriversQuery(Drivers);
 
 const seedDatabase = async () => {
-  const connection = await mysql.createConnection(dbConfig);
+  const connection = await getConnection();
 
   try {
     await connection.query('DELETE FROM drivers');
@@ -33,7 +32,7 @@ const seedDatabase = async () => {
   } catch (error) {
     console.error('Erro durante o seeding:', error);
   } finally {
-    await connection.end();
+    await closeConnection();
   }
 };
 

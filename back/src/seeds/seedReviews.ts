@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-import { dbConfig } from "../config/dbConfig.ts";
+import { dbConfig, getConnection } from "../config/dbManagerConnection.ts";
 import { Reviews } from './seedData.ts';
 import { ReviewsInterface } from '../interfaces/interfaces.ts';
 
@@ -22,7 +22,7 @@ const generateReviewsQuery = (reviews: ReviewsInterface[] ) => {
 const reviewsInsertQuery = generateReviewsQuery(Reviews);
 
 const seedDatabase = async () => {
-  const connection = await mysql.createConnection(dbConfig);
+  const connection = await getConnection();
 
   try {
     await connection.query('DELETE FROM reviews');
@@ -33,7 +33,7 @@ const seedDatabase = async () => {
   } catch (error) {
     console.error('Erro durante o seeding:', error);
   } finally {
-    await connection.end();
+    await getConnection();
   }
 };
 
