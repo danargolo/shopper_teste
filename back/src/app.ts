@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { rideRouter } from './routers/rideRouter.ts'
+import { errorMiddleware } from './middlewares/errorMiddleware.ts';
 
 dotenv.config();
 
@@ -13,8 +14,7 @@ app.use(express.json());
 
 app.use('/ride', rideRouter)
 
-app.get('/teste', (_req, res) => {
-  res.send('criada conexao com mysql2');}) 
+app.use(errorMiddleware);
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
