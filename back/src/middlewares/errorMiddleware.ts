@@ -6,11 +6,10 @@ export const errorMiddleware = (
   res: express.Response,
   _next: express.NextFunction
 ): void => {
-  console.error(err.message);
+  // console.error(err.message);
 
   const statusCode = err.statusCode ?? 500;
   const errorCode = err.errorCode ?? 'INTERNAL_ERROR';
-  // const errorDescription = err.errorDescription ??  'Erro interno do servidor';
 
   res.status(statusCode).json({
     error_code: errorCode,
