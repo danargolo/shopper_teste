@@ -1,30 +1,27 @@
-// import 'dotenv/config';  // Carrega variáveis de ambiente do arquivo .env
+import mysql from 'mysql2/promise';
 import app from './app.ts';
-import { Sequelize } from 'sequelize'; 
+import { dbConfig } from './config/dbConfig.ts';
 
-const sequelize = new Sequelize({
-  dialect: 'mysql',
-  host:"db",
-  port: 3306,
-  username: "root",
-  password: "root_password",
-  database: "travels_db",
-});
-
-
-async function startServer() {
+export const createConnection = async () => {
   try {
-    await sequelize.authenticate();
-    console.log('Conexão com o banco de dados foi bem-sucedida.');
-
-    const port = process.env.PORT ?? 8080;
-    app.listen(port, () => {
-      console.log(`Servidor rodando na porta ${port}`);
-    });
+    const connection = await mysql.createConnection(dbConfig);
+    console.log('Conexão com o banco de dados testada com sucesso!');
+    await connection.end();
   } catch (error) {
-    console.error('Não foi possível conectar ao banco de dados:', error);
-    process.exit(1); 
+    console.error('Erro ao conectar ao banco de dados:', error);
   }
-}
+};
 
-startServer();
+const startServer = () => {
+  const port = process.env.PORT ?? 8080;
+  app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+  });
+};
+
+const initializeApp = async () => {
+  startServer();
+  await createConnection();
+};
+
+initializeApp();

@@ -11,6 +11,6 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/teste', (_req, res) => {
-  res.send('deu certo');}) 
+  res.send('criada conexao com mysql2');}) 
 
 export default app;
