@@ -1,5 +1,4 @@
-import mysql from 'mysql2/promise';
-import { dbConfig, getConnection } from "../config/dbManagerConnection.ts";
+import { closeConnection, getConnection } from "../config/dbManagerConnection.ts";
 import { Reviews } from './seedData.ts';
 import { ReviewsInterface } from '../interfaces/interfaces.ts';
 
@@ -33,7 +32,7 @@ const seedDatabase = async () => {
   } catch (error) {
     console.error('Erro durante o seeding:', error);
   } finally {
-    await getConnection();
+    await closeConnection();
   }
 };
 
