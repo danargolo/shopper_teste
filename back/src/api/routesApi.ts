@@ -1,6 +1,7 @@
 import axios from "axios";
+import * as inter from "../interfaces/interfaces.ts";
 
-export const routesApi = async (origin: string, destination: string) => {
+export const routesApi = async (origin: string, destination: string): Promise< inter.Route | null > => {
   const apiKey = process.env.GOOGLE_API_KEY;
   const url = "https://routes.googleapis.com/directions/v2:computeRoutes"
 
@@ -23,7 +24,7 @@ export const routesApi = async (origin: string, destination: string) => {
     };
 
     const response = await axios.post(url, data, {headers});
-    // console.log(response.data.routes[0]);    
+    console.log(response);    
     
 
     const route = response.data.routes[0];
@@ -31,7 +32,7 @@ export const routesApi = async (origin: string, destination: string) => {
 
     // console.log(route.localizedValues);
     
-    const { text } = route.localizedValues.duration
+    // const { text } = route.localizedValues.duration
     const { distanceMeters, duration, startLocation, endLocation } = route.legs[0];
 
     return {
@@ -39,7 +40,7 @@ export const routesApi = async (origin: string, destination: string) => {
       destination: { latitude: endLocation.latLng.latitude, longitude: endLocation.latLng.longitude },
       distance: distanceMeters, 
       duration: duration,
-      routeResponse: route.legs[0], 
+      routeResponse: route.legs[0],
     };
   } catch (error) {
     console.error("Erro ao calcular rota", error);

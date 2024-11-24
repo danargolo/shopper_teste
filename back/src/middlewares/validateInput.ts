@@ -3,7 +3,7 @@ import { CustomError } from '../utils/customError.ts';
 
 export const validateInput = (req: express.Request, _res: express.Response, next: express.NextFunction) => {
   try {
-    const { origin, destination, customer_id } = req.body;
+    const { origin, destination, customer_id, driver } = req.body;
 
     if (customer_id !== undefined && (customer_id === null || customer_id === '')) {
       throw CustomError(
@@ -35,6 +35,14 @@ export const validateInput = (req: express.Request, _res: express.Response, next
         'Os dados fornecidos no corpo da requisição são inválidos',
         'INVALID_DATA'
       )
+    }
+
+    if (driver && driver.id !== undefined && (driver.id === null || driver.id === '')) {
+      throw CustomError(
+        400, 
+        'Os dados fornecidos no corpo da requisição são inválidos',
+        'INVALID_DATA'
+      ) 
     }
   
     next();

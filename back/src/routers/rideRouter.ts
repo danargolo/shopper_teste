@@ -1,11 +1,11 @@
 import express from "express";
 import { validateInput } from "../middlewares/validateInput.ts";
-import { confirmController, rideController } from "../controllers/rideController.ts";
+import { confirmController, estimateController } from "../controllers/rideController.ts";
 
 export const rideRouter = express.Router();
 
 rideRouter
-  .post('/estimate', validateInput, rideController)
+  .post('/estimate', validateInput, estimateController)
   .patch('/confirm', validateInput, confirmController)
   .get('/', (_req, res) => {
     try {

@@ -1,15 +1,7 @@
-export interface FormattedDriver {
-  id: number;
-  name: string;
-  description: string,
-  vehicle: string;
-  rate: number;
-  rating: any; //ajustar
-  comment: any; //ajustar
-};
+import * as interf from "../interfaces/interfaces.ts";
 
-export const formatDrivers = (rows: any): FormattedDriver[] => {
-  return rows.map((row: FormattedDriver) => ({
+export const formatDrivers = (rows: interf.RawDriver[]): interf.FormattedDriver[] => {
+  return rows.map((row: interf.RawDriver) => ({
     id: row.id,
     name: row.name,
     description: row.description,
