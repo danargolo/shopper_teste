@@ -3,10 +3,10 @@ export interface FormattedDriver {
   name: string;
   description: string,
   vehicle: string;
-  rating: any;
-  comment: any;
-  value: number;
-}
+  rate: number;
+  rating: any; //ajustar
+  comment: any; //ajustar
+};
 
 export const formatDrivers = (rows: any): FormattedDriver[] => {
   return rows.map((row: FormattedDriver) => ({
@@ -14,10 +14,10 @@ export const formatDrivers = (rows: any): FormattedDriver[] => {
     name: row.name,
     description: row.description,
     vehicle: row.vehicle,
+    rate: row.rate,
     review: {
       rating: row.rating,
       comment: row.comment,
-    },
-    value: row.value,
+    }
   })
 )};
