@@ -8,7 +8,7 @@ export interface Driver extends mysql.RowDataPacket {
   name: string;
   description: string;
   vehicle: string;
-  rate: number;
+  rate: string;
   min_distance: number;
   created_at: Date;
 }

@@ -28,6 +28,7 @@ const createTables = async () => {
     const createRidesTable = `
       CREATE TABLE IF NOT EXISTS rides (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        customer_id INT NOT NULL,
         origin VARCHAR(255) NOT NULL,
         destination VARCHAR(255) NOT NULL,
         distance INT NOT NULL,

@@ -24,8 +24,6 @@ export const routesApi = async (origin: string, destination: string): Promise< i
     };
 
     const response = await axios.post(url, data, {headers});
-    console.log(response);    
-    
 
     const route = response.data.routes[0];
     if (!route) return null;

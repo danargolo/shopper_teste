@@ -1,26 +1,9 @@
 import { routesApi } from "../api/routesApi.ts";
+import * as interf from "../interfaces/interfaces.ts";
 import { driveModel, getDriverByID } from "../models/driveModel.ts";
+import { saveRideModel } from "../models/rideModel.ts";
 import { addValueToDrivers } from "../utils/calculatDriversValues.ts";
 import { CustomError } from "../utils/customError.ts";
-
-export const confirmService = async (body: any) => {
-  const { id } = body.driver;
-  const driver = await getDriverByID(id);
-
-  if (!driver || driver.length === 0) {
-    throw CustomError(404, "Motorista não encontrado", "DRIVER_NOT_FOUND");
-  }
-
-  if (body.distance < driver.min_distance) {
-    throw CustomError(
-      406,
-      "Quilometragem inválida para o motorista",
-      "INVALID_DISTANCE"
-    );
-  }
-
-  return driver;
-};
 
 export const estimateService = async (_customer_id: string, origin: string, destination: string) => {
   const route: any = await routesApi(origin, destination);  
@@ -33,8 +16,8 @@ export const estimateService = async (_customer_id: string, origin: string, dest
 
   if (filteredDrivers === null || filteredDrivers.length === 0) {
     throw CustomError(
-      404, 
       "Motoristas não disponiveis para rota escolhida", 
+      404, 
       "DRIVER_NOT_FOUND"
     )
   }
@@ -50,4 +33,25 @@ export const estimateService = async (_customer_id: string, origin: string, dest
   }
 
   return formatedResponse;
+};
+
+export const confirmService = async (body: interf.RideHistoryInterface) => {
+  const { id } = body.driver;
+  const driver = await getDriverByID(id);
+
+  if (!driver || driver.length === 0) {
+    throw CustomError("Motorista não encontrado", 404, "DRIVER_NOT_FOUND");
+  }
+
+  if (body.distance < driver.min_distance) {
+    throw CustomError(
+      "Quilometragem inválida para o motorista",
+      406,
+      "INVALID_DISTANCE"
+    );
+  }
+
+  await saveRideModel(body)
+
+  return { sucess:true }
 };
