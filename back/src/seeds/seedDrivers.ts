@@ -6,12 +6,13 @@ const generateDriversQuery = (drivers: DriversInterface[] ) => {
   const values = drivers
     .map(
       (driver) =>
-        `('${driver.name}', '${driver.description}', '${driver.vehicle}', '${driver.value}')`
+        `('${driver.name}', '${driver.description}', '${driver.vehicle}', 
+      '${driver.rate}', '${driver.min_distance}')`
     )
     .join(',\n');
 
   const query = `
-    INSERT INTO drivers (name, description, vehicle, value)
+    INSERT INTO drivers (name, description, vehicle, rate, min_distance)
     VALUES ${values};
   `;
   

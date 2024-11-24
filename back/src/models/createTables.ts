@@ -10,7 +10,8 @@ const createTables = async () => {
         name VARCHAR(255) NOT NULL,
         description VARCHAR(255) NOT NULL,
         vehicle VARCHAR(255) NOT NULL,
-        value DECIMAL(10, 2) NOT NULL DEFAULT 1.00,
+        rate DECIMAL(10, 2) NOT NULL DEFAULT 1.00,
+        min_distance INT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `;

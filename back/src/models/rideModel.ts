@@ -1,4 +1,5 @@
 import { getConnection } from "../config/dbManagerConnection.ts";
+import { CustomError } from "../utils/customError.ts";
 import { formatDrivers } from "../utils/formatDriver.ts";
 
 export const driveModel = async () => {
@@ -8,7 +9,7 @@ export const driveModel = async () => {
     d.name AS name,
     d.description as description, 
     d.vehicle AS vehicle,
-    d.value AS value,
+    d.rate AS rate,
     r.rating AS rating,
     r.comment AS comment
   FROM 
@@ -16,18 +17,15 @@ export const driveModel = async () => {
   JOIN 
     reviews r ON d.id = r.driver_id
   WHERE 
-    d.value >= ?
+    d.rate >= ?
   ORDER BY 
-    d.value ASC;
+    d.rate ASC;
   `;
 
   const value = [1];
 
   const connection = await getConnection();
-  const [rows, values] = await connection.execute(query, value);
-
-  console.log(rows)
-  console.log(values)
+  const [rows] = await connection.execute(query, value);
 
   const formattedDrivers = formatDrivers(rows as any[]);
 
@@ -37,3 +35,12 @@ export const driveModel = async () => {
     console.log(error)
   }
 };
+
+export const getDriverByID = async (id: number) => {
+  const query = `SELECT d.name, d.min_distance FROM drivers d WHERE d.id = ?;`;
+
+  const connection = await getConnection();
+  const [rows]: [any[], any] = await connection.execute(query, [id]); //fazer tipagem rows
+
+  return rows;
+}

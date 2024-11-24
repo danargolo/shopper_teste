@@ -3,7 +3,8 @@ export interface DriversInterface {
   name: string;
   description: string;
   vehicle: string;
-  value: number;
+  rate: number;
+  min_distance: number;
 }
 
 
