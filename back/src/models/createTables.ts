@@ -25,16 +25,15 @@ const createTables = async () => {
       );
     `;
 
-    const createRidersTable = `
-      CREATE TABLE IF NOT EXISTS riders (
+    const createRidesTable = `
+      CREATE TABLE IF NOT EXISTS rides (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         origin VARCHAR(255) NOT NULL,
         destination VARCHAR(255) NOT NULL,
         distance INT NOT NULL,
         duration VARCHAR(255) NOT NULL,
-        value INT NOT NULL,
         driver_id INT NOT NULL,
+        value INT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (driver_id) REFERENCES drivers(id)
       );
@@ -46,7 +45,7 @@ const createTables = async () => {
     await connection.execute(createReviewsTable);
     console.log('Tabela "reviews" criada com sucesso.');
 
-    await connection.execute(createRidersTable);
+    await connection.execute(createRidesTable);
     console.log('Tabela "rides" criada com sucesso.');
 
     await closeConnection();

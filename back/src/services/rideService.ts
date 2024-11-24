@@ -1,5 +1,5 @@
 import { routesApi } from "../api/routesApi.ts";
-import { driveModel, getDriverByID } from "../models/rideModel.ts";
+import { driveModel, getDriverByID } from "../models/driveModel.ts";
 import { addValueToDrivers } from "../utils/calculatDriversValues.ts";
 import { CustomError } from "../utils/customError.ts";
 
