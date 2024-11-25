@@ -34,6 +34,7 @@ const createTables = async () => {
         distance INT NOT NULL,
         duration VARCHAR(255) NOT NULL,
         driver_id INT NOT NULL,
+        driver_name VARCHAR(255) NOT NULL,
         value INT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (driver_id) REFERENCES drivers(id)

@@ -39,11 +39,11 @@ export const driveModel = async (distance:number): Promise<interf.FormattedDrive
   const connection = await getConnection();
   const [rows]: [mysql.RowDataPacket[], mysql.FieldPacket[]] = await connection.execute(query, value);
 
-  const formattedDrivers = formatDrivers(rows as interf.RawDriver[]);
+  const formattedDrivers = formatDrivers(rows as interf.RawDriver[]); //retirar e por em service!
 
   connection.release();
 
-  return formattedDrivers;
+  return formattedDrivers; 
     
   } catch (error) {
     console.log(error)
@@ -53,7 +53,9 @@ export const driveModel = async (distance:number): Promise<interf.FormattedDrive
 
 export const getDriverByID = async (id: number | string) => {
   const query = `SELECT 
-  * 
+  d.*,
+  r.rating, 
+  r.comment
   FROM drivers d
   JOIN 
     reviews r ON d.id = r.driver_id

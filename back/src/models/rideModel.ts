@@ -8,8 +8,8 @@ export const saveRideModel = async (data: interf.RideHistoryInterface) => {
     const connection = await getConnection();
 
     const query = `
-      INSERT INTO rides (customer_id, origin, destination, distance, duration, driver_id, value)
-      VALUES (?, ?, ?, ?, ?, ?, ?);
+      INSERT INTO rides (customer_id, origin, destination, distance, duration, driver_id, driver_name, value)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?);
     `;
 
     const params = [
@@ -19,6 +19,7 @@ export const saveRideModel = async (data: interf.RideHistoryInterface) => {
       data.distance,
       data.duration,
       data.driver.id,
+      data.driver.name,
       data.value,
     ];
 
