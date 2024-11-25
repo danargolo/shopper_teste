@@ -1,19 +1,18 @@
-import React, { ChangeEvent, MouseEventHandler, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
 import { useRenderContext } from "../../context/renderContext";
+import { apiRequest } from "../../services/apiRequest";
 
 interface FormDataInterface {
-  userId: string;
+  customer_id: string;
   origin: string;
   destination: string;
 }
 
 export const TravelForms = (): React.JSX.Element => {
-  const { setCurrentRender, setIsLoading } = useRenderContext();
-  // const navigate = useNavigate();
+  const { setCurrentRender, setIsLoading, setDataResponse } = useRenderContext();
   const [formData, setFormData] = useState<FormDataInterface>({
-    userId: "",
+    customer_id: "",
     origin: "",
     destination: "",
   });
@@ -24,12 +23,26 @@ export const TravelForms = (): React.JSX.Element => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleClick = () => {
-    setIsLoading(true);
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();    
+    setIsLoading(true); 
 
-    setTimeout(() => setIsLoading(false), 2000)
+    const response = await apiRequest(
+      "/ride/estimate",
+      "POST",
+      formData
+    )
 
+    setDataResponse({
+      customer_id: formData.customer_id,
+      input_origin: formData.origin,
+      input_destination: formData.destination,
+      ...response.data,
+    })
+
+    setIsLoading(false); 
     setCurrentRender('options')
+    
   }
 
   return (
@@ -37,12 +50,12 @@ export const TravelForms = (): React.JSX.Element => {
       <h2 className="tittle">Travel Request</h2>
       <form>
         <div>
-          <label htmlFor="userId">ID Usuário</label>
+          <label htmlFor="customer_id">ID Usuário</label>
           <input
             type="text"
-            id="userId"
-            name="userId"
-            value={formData.userId}
+            id="customer_id"
+            name="customer_id"
+            value={formData.customer_id}
             onChange={handleInputChange}
             className="input-travel"
             required
@@ -78,7 +91,7 @@ export const TravelForms = (): React.JSX.Element => {
         <button
           type="submit"
           className="formTravelBtn"
-          onClick={handleClick}
+          onClick={(e) => { handleClick(e)}}
           aria-label="Estimate Travel Cost"
         >
           Estimar Valor da Viagem

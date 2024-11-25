@@ -5,6 +5,8 @@ interface RenderContextInterface {
   setCurrentRender: (value: string) => void;
   isLoading: boolean; 
   setIsLoading: (value: boolean) => void;
+  dataResponse: any;
+  setDataResponse: (value: boolean) => void;
 }
 
 const RenderContext = createContext<RenderContextInterface | undefined>(undefined);
@@ -12,12 +14,15 @@ const RenderContext = createContext<RenderContextInterface | undefined>(undefine
 export const RenderProvider = ({children}: { children: ReactNode }) => {
   const [ currentRender, setCurrentRender ] = useState('forms');
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ dataResponse, setDataResponse ] = useState({});
 
   const contextValue  = useMemo(() => {
     return {
-      currentRender, setCurrentRender, isLoading, setIsLoading
+      currentRender, setCurrentRender, isLoading, setIsLoading,
+      dataResponse, setDataResponse
     };
-  }, [currentRender, setCurrentRender, isLoading, setIsLoading]);
+  }, [currentRender, setCurrentRender, isLoading, setIsLoading,
+      dataResponse, setDataResponse  ]);
 
   return (
     <RenderContext.Provider value={contextValue}>
