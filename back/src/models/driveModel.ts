@@ -41,6 +41,8 @@ export const driveModel = async (distance:number): Promise<interf.FormattedDrive
 
   const formattedDrivers = formatDrivers(rows as interf.RawDriver[]);
 
+  connection.release();
+
   return formattedDrivers;
     
   } catch (error) {
@@ -49,7 +51,7 @@ export const driveModel = async (distance:number): Promise<interf.FormattedDrive
   }
 };
 
-export const getDriverByID = async (id: number) => {
+export const getDriverByID = async (id: number | string) => {
   const query = `SELECT 
   * 
   FROM drivers d
@@ -59,5 +61,7 @@ export const getDriverByID = async (id: number) => {
 
   const connection = await getConnection();
   const [rows]: [Driver[], mysql.FieldPacket[]] = await connection.execute(query, [id]); 
+
+  connection.release();
   return rows[0];
 }
