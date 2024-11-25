@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import './styles.css';
 import { useRenderContext } from '../../context/renderContext';
+import { useState } from 'react';
+import { apiRequest } from '../../services/apiRequest';
 
 interface DriversInterface {
   id: number;
@@ -14,64 +15,50 @@ interface DriversInterface {
   value: number;
 }
 
-const mockDrivers: DriversInterface[] = [
-  {
-    id: 1,
-    name: "Homer Simpson",
-    description: "Olá! Sou o Homer, seu motorista camarada! Relaxe e aproveite o passeio, com direito a rosquinhas e boas risadas (e talvez alguns desvios).",
-    vehicle: "Plymouth Valiant 1973 rosa e enferrujado",
-    review: {
-      rating: 2,
-      comment: "Motorista simpático,mas errou o caminho 3vezes. O carro cheira a donuts."
-    },
-    value: 35.50
+interface RequestBodyInterface {
+  customer_id: string,
+  origin: string,
+  destination: string,
+  distance: number,
+  duration: string,
+  driver: {
+    id: number,
+    name: string
   },
-  {
-    id: 2,
-    name: "Dominic Toretto",
-    description: "Ei, aqui é o Dom. Pode entrar, vou te levar com segurança e rapidez ao seu destino. Só não mexa no rádio, a playlist é sagrada.",
-    vehicle: "Dodge Charger R/T 1970 modificado",
-    review: {
-      rating: 4,
-      comment: "Que viagem incrível! O carro é um show à parte e o motorista, apesar de ter uma cara de poucos amigos, foi super gente boa. Recomendo!"
-    },
-    value: 35.50
-  },
-  {
-    id: 3,
-    name: "James Bond",
-    description: "Boa noite, sou James Bond. À seu dispor para um passeio suave e discreto. Aperte o cinto e aproveite a viagem.",
-    vehicle: "Aston Martin DB5 clássico",
-    review: {
-      rating: 5,
-      comment: "Serviço impecável! O motorista é a própria definição de classe e o carro é simplesmente magnífico. Uma experiência digna de um agente secreto."
-    },
-    value: 35.50
-  },
-  {
-    id: 1,
-    name: "John Smith",
-    description: "Experienced driver with 5+ years",
-    vehicle: "Toyota Camry - ABC123",
-    review: {
-      rating: 1,
-      comment: "Motorista simpático,mas errou o caminho 20vezes."
-    },
-    value: 15.50
-  }
-];
+  value: number
+}
 
 export const TravelOptions = (): React.JSX.Element => {
-  // const navigate = useNavigate();
-  const { setCurrentRender, setIsLoading } = useRenderContext();
+  const { setCurrentRender, setIsLoading, dataResponse } = useRenderContext();
 
-  
-  const handleClick = () => {
+  const { options } = dataResponse;
+    
+  const handleClick = async (driver: DriversInterface) => {
     setIsLoading(true);
 
-    setTimeout(() => setIsLoading(false), 2000)
+    const rideDataConfirm = {
+      customer_id: dataResponse.customer_id, 
+      origin: dataResponse.input_origin,
+      destination: dataResponse.input_destination,
+      distance: dataResponse.distance,
+      duration: dataResponse.duration,
+      driver: {
+        id: driver.id,
+        name: driver.name,
+      },
+      value: driver.value,
+    };  
 
-    setCurrentRender('history')
+    const response = await apiRequest(
+      "/ride/confirm",
+      "PATCH",
+      rideDataConfirm
+    )
+
+    console.log(response);
+
+    setCurrentRender('history');
+    setIsLoading(false)
   }
 
   return (
@@ -81,8 +68,8 @@ export const TravelOptions = (): React.JSX.Element => {
       </div>
       <h3 className="tittle">Motoristas Disponíveis</h3>
 
-      {(mockDrivers && mockDrivers.length > 0) ? (
-        mockDrivers.map((driver) => (
+      {(options && options.length > 0) ? (
+        options.map((driver: DriversInterface) => (
           <div key={driver.id + driver.value} className="driver-card">
             <div className="container-data">
               <h4 className="card-name">{driver.name}</h4>
@@ -99,7 +86,7 @@ export const TravelOptions = (): React.JSX.Element => {
               <p className="card-value">{driver.value}</p>
               <button 
                 className="card-btn"
-                onClick={ handleClick }
+                onClick={ () => handleClick(driver) }
               >
                   Escolher
               </button>
