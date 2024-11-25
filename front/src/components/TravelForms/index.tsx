@@ -25,7 +25,7 @@ export const TravelForms = (): React.JSX.Element => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();    
-    setIsLoading(true); 
+    setIsLoading({signal:true, message:"Buscando motoristas..."}); 
 
     const response = await apiRequest(
       "/ride/estimate",
@@ -40,7 +40,7 @@ export const TravelForms = (): React.JSX.Element => {
       ...response.data,
     })
 
-    setIsLoading(false); 
+    setIsLoading({signal:false}); 
     setCurrentRender('options')
     
   }

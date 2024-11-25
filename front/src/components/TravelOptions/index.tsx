@@ -34,7 +34,7 @@ export const TravelOptions = (): React.JSX.Element => {
   const { options } = dataResponse;
     
   const handleClick = async (driver: DriversInterface) => {
-    setIsLoading(true);
+    setIsLoading({signal:true});
 
     const rideDataConfirm = {
       customer_id: dataResponse.customer_id, 
@@ -58,7 +58,7 @@ export const TravelOptions = (): React.JSX.Element => {
     console.log(response);
 
     setCurrentRender('history');
-    setIsLoading(false)
+    setIsLoading({signal: false})
   }
 
   return (
