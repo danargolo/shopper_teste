@@ -86,6 +86,8 @@ export const getAllDrivers = async () => {
   try {
     const connection = await getConnection();
     const [rows]: [mysql.RowDataPacket[], mysql.FieldPacket[]] = await connection.query(query);
+
+    connection.release()
     return rows;
 
   } catch (error: any) {

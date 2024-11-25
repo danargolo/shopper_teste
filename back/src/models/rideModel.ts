@@ -47,5 +47,6 @@ export const getRideHistory = async (customer_id: string, driver_id?: string) =>
   const connection = await getConnection();
   const [rows]: [mysql.RowDataPacket[], mysql.FieldPacket[]] = await connection.execute(query, values);
 
+  connection.release();
   return rows;
 };
