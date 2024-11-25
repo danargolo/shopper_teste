@@ -1,7 +1,7 @@
 import * as express from 'express';
 
 export const errorMiddleware = (
-  err: Error & { errorCode?: string; errorDescription?: string; statusCode?: number },
+  err: Error & { errorCode?: string; statusCode?: number },
   _req: express.Request,
   res: express.Response,
   _next: express.NextFunction

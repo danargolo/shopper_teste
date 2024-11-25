@@ -58,14 +58,14 @@ export interface Route {
 
 
 export interface RideHistoryInterface {
-  "customer_id": string,
-  "origin": string,
-  "destination": string,
-  "distance": number,
-  "duration": string,
-  "driver": {
-    "id": number,
-    "name": string
+  customer_id: string,
+  origin: string,
+  destination: string,
+  distance: number,
+  duration: string,
+  driver: {
+    id: number,
+    name: string
   },
-  "value": number
+  value: number
 }

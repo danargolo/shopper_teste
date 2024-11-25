@@ -5,9 +5,9 @@ export const addValueToDrivers = (drivers: inter.FormattedDriver[], distance: nu
   if (!drivers) {
     return
   }
-  const driverWithValue =  drivers.map(driver => {
+  const driverWithValue =  drivers.map(({ rate, ...driver }) => {
 
-    const value = distance * parseFloat(driver.rate);
+    const value = distance * parseFloat(rate);
 
     return {
       ...driver,
