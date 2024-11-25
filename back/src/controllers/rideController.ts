@@ -1,7 +1,5 @@
 import * as express from "express"; //ajustar config typescript
 import { confirmService, estimateService, rideHistoryService } from "../services/rideService.ts";
-import { CustomError } from "../utils/customError.ts";
-
 
 export const estimateController = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
@@ -33,7 +31,7 @@ export const confirmController = async ( req: express.Request, res: express.Resp
 
 }
 
-export const rideHistoryController  = async ( req: express.Request, res: express.Response, next: express.NextFunction )=> {
+export const rideHistoryController  = async ( req: express.Request, res: express.Response, next: express.NextFunction ) => {
 try {
   const { customer_id } = req.params;
   const { driver_id } = req.query;

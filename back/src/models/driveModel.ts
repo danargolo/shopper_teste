@@ -80,7 +80,7 @@ export const getAllDrivers = async () => {
     FROM 
       drivers
     ORDER BY 
-      name ASC;
+      id ASC;
   `;
 
   try {
