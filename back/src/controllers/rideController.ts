@@ -1,5 +1,6 @@
 import * as express from "express"; //ajustar config typescript
-import { confirmService, estimateService } from "../services/rideService.ts";
+import { confirmService, estimateService, rideHistoryService } from "../services/rideService.ts";
+import { CustomError } from "../utils/customError.ts";
 
 
 export const estimateController = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -29,5 +30,23 @@ export const confirmController = async ( req: express.Request, res: express.Resp
     
   } //ajustar o throw erro
   
+
+}
+
+export const rideHistoryController  = async ( req: express.Request, res: express.Response, next: express.NextFunction )=> {
+try {
+  const { customer_id } = req.params;
+  const { driver_id } = req.query;
+
+  const response = await rideHistoryService( customer_id, driver_id as string);
+
+  res.status(200).json(response)
+
+  
+} catch (error) {
+  next(error)
+}
+
+
 
 }

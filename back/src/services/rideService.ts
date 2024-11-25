@@ -1,7 +1,7 @@
 import { routesApi } from "../api/routesApi.ts";
 import * as interf from "../interfaces/interfaces.ts";
 import { driveModel, getDriverByID } from "../models/driveModel.ts";
-import { saveRideModel } from "../models/rideModel.ts";
+import { getRideHistory, saveRideModel } from "../models/rideModel.ts";
 import { addValueToDrivers } from "../utils/calculatDriversValues.ts";
 import { CustomError } from "../utils/customError.ts";
 
@@ -55,3 +55,26 @@ export const confirmService = async (body: interf.RideHistoryInterface) => {
 
   return { sucess:true }
 };
+
+export const rideHistoryService = async (customer_id: string, driver_id?: string) => {
+  let driver
+
+  if (driver_id) {
+    driver = await getDriverByID(driver_id);
+
+    if (!driver || driver.length === 0) {
+      throw CustomError("Motorista invalido", 400, "INVALID_DRIVER");
+    }
+  }
+
+  const rideHistory = await getRideHistory(customer_id, driver_id);
+
+  if (!rideHistory || rideHistory.length === 0) {
+    throw CustomError("Nenhum registro encontrado", 404, "NO_RIDES_FOUND");
+  }
+
+  return {
+    customer_id,
+    rides: rideHistory,
+  };
+}
