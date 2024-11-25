@@ -49,13 +49,11 @@ export const TravelOptions = (): React.JSX.Element => {
       value: driver.value,
     };  
 
-    const response = await apiRequest(
+    await apiRequest(
       "/ride/confirm",
       "PATCH",
       rideDataConfirm
-    )
-
-    console.log(response);
+    )    
 
     setCurrentRender('history');
     setIsLoading({signal: false})
