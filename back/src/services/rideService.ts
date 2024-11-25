@@ -2,8 +2,9 @@ import { routesApi } from "../api/routesApi.ts";
 import * as interf from "../interfaces/interfaces.ts";
 import { driveModel, getDriverByID } from "../models/driveModel.ts";
 import { getRideHistory, saveRideModel } from "../models/rideModel.ts";
-import { addValueToDrivers } from "../utils/calculatDriversValues.ts";
+import { addValueToDrivers } from "../utils/addValueToDrivers.ts";
 import { CustomError } from "../utils/customError.ts";
+import { formatRideResponse } from "../utils/formatRideResponse.ts";
 
 export const estimateService = async (_customer_id: string, origin: string, destination: string) => {
   const route: any = await routesApi(origin, destination);  
@@ -53,7 +54,7 @@ export const confirmService = async (body: interf.RideHistoryInterface) => {
 
   await saveRideModel(body)
 
-  return { sucess:true }
+  return { success:true }
 };
 
 export const rideHistoryService = async (customer_id: string, driver_id?: string) => {
@@ -65,7 +66,7 @@ export const rideHistoryService = async (customer_id: string, driver_id?: string
     if (!driver || driver.length === 0) {
       throw CustomError("Motorista invalido", 400, "INVALID_DRIVER");
     }
-  }
+  };
 
   const rideHistory = await getRideHistory(customer_id, driver_id);
 
@@ -75,6 +76,6 @@ export const rideHistoryService = async (customer_id: string, driver_id?: string
 
   return {
     customer_id,
-    rides: rideHistory,
+    rides: formatRideResponse(rideHistory),
   };
 }
