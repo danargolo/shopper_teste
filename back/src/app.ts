@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { rideRouter } from './routers/rideRouter.ts'
 import { errorMiddleware } from './middlewares/errorMiddleware.ts';
+import { driveRouter } from './routers/driverRoutes.ts';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/ride', rideRouter)
+app.use('/drivers', driveRouter);
 
 app.use(errorMiddleware);
 

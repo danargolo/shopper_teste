@@ -2,6 +2,7 @@ import { getConnection } from "../config/dbManagerConnection.ts";
 import * as mysql from 'mysql2/promise';
 import { formatDrivers } from "../utils/formatDriver.ts";
 import * as interf from "../interfaces/interfaces.ts";
+import { CustomError } from "../utils/customError.ts";
 
 export interface Driver extends mysql.RowDataPacket {
   id: number;
@@ -66,4 +67,28 @@ export const getDriverByID = async (id: number | string) => {
 
   connection.release();
   return rows[0];
+}
+export const getAllDrivers = async () => {
+  const query = `
+    SELECT 
+      id, 
+      name, 
+      description, 
+      vehicle, 
+      rate, 
+      min_distance 
+    FROM 
+      drivers
+    ORDER BY 
+      name ASC;
+  `;
+
+  try {
+    const connection = await getConnection();
+    const [rows]: [mysql.RowDataPacket[], mysql.FieldPacket[]] = await connection.query(query);
+    return rows;
+
+  } catch (error: any) {
+    throw CustomError(error.sqlMessage, 500, error.code);
+  }
 }
