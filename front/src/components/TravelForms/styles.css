@@ -5,6 +5,17 @@ label {
   color: #4B5563;
 }
 
+/* input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+} */
+
+
 form {
   display: flex;
   flex-direction: column;

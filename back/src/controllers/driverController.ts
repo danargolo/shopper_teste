@@ -7,8 +7,6 @@ export const getAllDriverController = async ( _req: express.Request, res: expres
     const response = await getAllDriverService();
   
     res.status(200).json(response)
-  
-    
   } catch (error) {
     next(error)
   }

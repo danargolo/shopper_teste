@@ -26,6 +26,8 @@ export const routesApi = async (origin: string, destination: string): Promise< i
     const response = await axios.post(url, data, {headers});
 
     const route = response.data.routes[0];
+    // console.log(route.legs[0].steps);
+    
     if (!route) return null;
 
     // console.log(route.localizedValues);

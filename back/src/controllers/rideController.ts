@@ -26,7 +26,7 @@ export const confirmController = async ( req: express.Request, res: express.Resp
   } catch (error) {
     next(error);
     
-  } //ajustar o throw erro
+  }
   
 
 }

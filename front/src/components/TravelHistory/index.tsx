@@ -159,7 +159,7 @@ export const TravelHistory = (): React.JSX.Element => {
                     </tr>
                   )
                 ) : 
-                null
+                (<tr>Sem histórico de viagens para exibir.</tr> )
                }
             </tbody>
           </table>
