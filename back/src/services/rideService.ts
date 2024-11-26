@@ -1,3 +1,4 @@
+import { mapStaticAPI } from "../api/mapStaticApi.ts";
 import { routesApi } from "../api/routesApi.ts";
 import * as interf from "../interfaces/interfaces.ts";
 import { driveModel, getDriverByID } from "../models/driveModel.ts";
@@ -9,7 +10,8 @@ import { formatRideResponse } from "../utils/formatRideResponse.ts";
 export const estimateService = async (_customer_id: string, origin: string, destination: string) => {
   const route: any = await routesApi(origin, destination);  
 
-  const { distance, duration, routeResponse, ...remainingRoute } = route; 
+  const { distance, duration, routeResponse, ...remainingRoute } = route;
+  
 
   const parseDistance = parseFloat((distance / 1000).toFixed(1));
 
@@ -24,13 +26,21 @@ export const estimateService = async (_customer_id: string, origin: string, dest
   }
 
   const driverUpdated = addValueToDrivers(filteredDrivers, parseDistance);
+
+  const staticMap = await mapStaticAPI(routeResponse, routeResponse.polyline);
+
+  // console.log(staticMap);
+  
   
   const formatedResponse = {
     ...remainingRoute,
     distance: parseDistance,
     duration,
     options: driverUpdated,
-    routeResponse
+    routeResponse: {
+      staticMap,
+      ...routeResponse
+    }
   }
 
   return formatedResponse;

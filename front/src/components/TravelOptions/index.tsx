@@ -2,6 +2,7 @@ import './styles.css';
 import { useRenderContext } from '../../context/renderContext';
 import { useState } from 'react';
 import { apiRequest } from '../../services/apiRequest';
+import StaticMapComponent from '../StaticMap';
 
 interface DriversInterface {
   id: number;
@@ -30,8 +31,11 @@ interface RequestBodyInterface {
 
 export const TravelOptions = (): React.JSX.Element => {
   const { setCurrentRender, setIsLoading, dataResponse } = useRenderContext();
+  // const { staticMap, setStaticMap } = useState('');
 
   const { options } = dataResponse;
+
+  // console.log(dataResponse);  
     
   const handleClick = async (driver: DriversInterface) => {
     setIsLoading({signal:true});
@@ -62,7 +66,7 @@ export const TravelOptions = (): React.JSX.Element => {
   return (
     <div className="drivers-options">
       <div className="map-container">
-        <span className="card-text">Mapa</span>
+        <img src={dataResponse.routeResponse.staticMap} alt='Route Map Static'/>
       </div>
       <h3 className="tittle">Motoristas Disponíveis</h3>
 
