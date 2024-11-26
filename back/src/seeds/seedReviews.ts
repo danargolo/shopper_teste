@@ -24,7 +24,9 @@ const seedDatabase = async () => {
   const connection = await getConnection();
 
   try {
-    await connection.query('DELETE FROM reviews');
+    await connection.query('TRUNCATE TABLE reviews');
+    console.log("Truncate na tabela Reviews.");
+    
 
     await connection.query(reviewsInsertQuery);
 
