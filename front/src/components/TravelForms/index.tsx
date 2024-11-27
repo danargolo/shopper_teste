@@ -3,6 +3,7 @@ import { useRenderContext } from "../../context/renderContext";
 import { apiRequest } from "../../services/apiRequest";
 import { ErrorHandler } from "../ErrorHandler";
 import "./styles.css";
+import { Hero } from "../Hero";
 
 interface FormDataInterface {
   customer_id: string;
@@ -101,73 +102,86 @@ export const TravelForms = (): React.JSX.Element => {
   };
 
   return (
-    <div className="form-travel-container">
-      <h2 className="tittle">Travel Request</h2>
-      <form>
-        <div>
-          <label htmlFor="customer_id">ID Usuário</label>
-          <input
-            type="text"
-            id="customer_id"
-            name="customer_id"
-            value={formData.customer_id}
-            onChange={(e) => handleInputChange(e)}
-            className={`input-travel ${
-              formErrors.customer_id && formData.customer_id.trim() !== "" 
-                ? "input-error" : ""
-            }`}
-            required
-            aria-label="User ID"
-          />
-          <div className={ formErrors.customer_id && (formData.customer_id.trim() !== "")
-            ? "error-visible" : "error-hide" }><p>{formErrors.customer_id}</p></div>
-        </div>
-        <div>
-          <label htmlFor="origin">Endereço de Origem</label>
-          <input
-            type="text"
-            id="origin"
-            name="origin"
-            value={formData.origin}
-            onChange={handleInputChange}
-            className={`input-travel ${formErrors.origin ? "input-error" : ""}`}
-            required
-            aria-label="Origin Address"
-          />
-          {formErrors.origin && (
-            <p className="error-text">{formErrors.origin}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="destination">Endereço de Destino</label>
-          <input
-            type="text"
-            id="destination"
-            name="destination"
-            value={formData.destination}
-            onChange={handleInputChange}
-            className={`input-travel ${
-              formErrors.destination ? "input-error" : ""
-            }`}
-            required
-            aria-label="Destination Address"
-          />
-          {formErrors.destination && (
-            <p className="error-text">{formErrors.destination}</p>
-          )}
-        </div>
-        <button
-          type="submit"
-          className="formTravelBtn"
-          onClick={(e) => {
-            handleClick(e);
-          }}
-          aria-label="Estimate Travel Cost"
-        >
-          Estimar Valor da Viagem
-        </button>
-      </form>
+    <>
+      <Hero />
+      <div className="form-travel-container">
+        <h2 className="tittle">Travel Request</h2>
+        <form>
+          <div>
+            <label htmlFor="customer_id">ID Usuário</label>
+            <input
+              type="text"
+              id="customer_id"
+              name="customer_id"
+              value={formData.customer_id}
+              onChange={(e) => handleInputChange(e)}
+              className={`input-travel ${
+                formErrors.customer_id && formData.customer_id.trim() !== ""
+                  ? "input-error"
+                  : ""
+              }`}
+              required
+              aria-label="User ID"
+            />
+            <div
+              className={
+                formErrors.customer_id && formData.customer_id.trim() !== ""
+                  ? "error-visible"
+                  : "error-hide"
+              }
+            >
+              <p>{formErrors.customer_id}</p>
+            </div>
+          </div>
+          <div>
+            <label htmlFor="origin">Endereço de Origem</label>
+            <input
+              type="text"
+              id="origin"
+              name="origin"
+              value={formData.origin}
+              onChange={handleInputChange}
+              className={`input-travel ${
+                formErrors.origin ? "input-error" : ""
+              }`}
+              required
+              aria-label="Origin Address"
+            />
+            {formErrors.origin && (
+              <p className="error-text">{formErrors.origin}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="destination">Endereço de Destino</label>
+            <input
+              type="text"
+              id="destination"
+              name="destination"
+              value={formData.destination}
+              onChange={handleInputChange}
+              className={`input-travel ${
+                formErrors.destination ? "input-error" : ""
+              }`}
+              required
+              aria-label="Destination Address"
+            />
+            {formErrors.destination && (
+              <p className="error-text">{formErrors.destination}</p>
+            )}
+          </div>
+          <button
+            type="submit"
+            className="formTravelBtn"
+            onClick={(e) => {
+              handleClick(e);
+            }}
+            aria-label="Estimate Travel Cost"
+          >
+            Estimar Valor da Viagem
+          </button>
+        </form>
+      </div>
       {throwError && <ErrorHandler />}
-    </div>
+    </>
   );
 };

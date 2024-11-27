@@ -7,7 +7,6 @@ function App() {
   return (
     <>
       <Header />
-      {/* <Loader /> */}
       <RenderComponent />
       {/* <Routes>
         <Route path="/" element={<TravelForms />} />

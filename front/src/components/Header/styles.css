@@ -1,7 +1,9 @@
 header {
+  display: flex;
+  justify-content: center;
   background-color: #1E2044;
   color: #FFFFFF;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -17,6 +19,8 @@ nav {
   display: flex;
   justify-content: space-around;
   width: 15.625rem;
+  height: 90%;
+  align-items: end;
 }
 
 ul {
@@ -52,6 +56,7 @@ li {
 
 .header-container {
   display: flex;
+  width: 90%;
   justify-content: space-between;
   align-items: center;
 }
