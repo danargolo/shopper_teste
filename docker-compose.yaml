@@ -12,8 +12,8 @@ services:
       MYSQL_DATABASE: travels_db
       MYSQL_USER: travel
       MYSQL_PASSWORD: travel
-    # volumes:
-    #   - data:/data/db_shopper
+    volumes:
+      - data:/data/db_shopper
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
       interval: 30s
@@ -48,16 +48,17 @@ services:
       "
     networks:
       - db-network
+      - front-network
 
   front:
     build: ./front
     container_name: front_shopper
     ports:
-      - "3000:3000"
+      - "80:80"
     env_file:
       - .env
-    # environment:
-    #   - PORT=80
+    environment:
+      - PORT=80
     volumes:
       - ./front:/app
     depends_on:
@@ -65,7 +66,7 @@ services:
         condition: service_started
     command: sh -c "npm install && npm run dev"
     networks:
-      - db-network
+      - front-network
 
 
 networks:

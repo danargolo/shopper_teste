@@ -36,12 +36,9 @@ try {
   const { customer_id } = req.params;
   const { driver_id } = req.query;
 
-  const response = await rideHistoryService( customer_id, driver_id as string);
-  console.log(response);
-  
+  const response = await rideHistoryService( customer_id, driver_id as string);  
 
-  res.status(200).json(response)
-
+  res.status(200).json(response);
   
 } catch (error) {
   next(error)
