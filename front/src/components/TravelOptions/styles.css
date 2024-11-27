@@ -8,12 +8,39 @@
 
 .map-container {
   background-color: #F3F4F6;
-  height: 34rem;
+  width: 50rem;
+  height: 37.5rem;
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#map-img{
+  width: 50rem;
+  height: 33.5rem;
+}
+
+@media (max-width: 1024px) {
+  #map-img {
+    width: 80%; 
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  #map-img {
+    width: 70%; 
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #map-img {
+    width: 65%; 
+    height: auto;
+  }
 }
 
 #drivers-container {
@@ -33,6 +60,26 @@
   grid-auto-rows: 300px;
   gap: 1rem;
 }
+
+@media (max-width: 1024px) {
+  #cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .driver-card {
+    height: 310px;
+  }
+}
+
+@media (max-width: 768px) {
+  #cards-container {
+    grid-template-columns: repeat(1, 0.8fr); 
+  }
+  .driver-card {
+    height: 310px;
+  }
+  
+}
+
 .driver-card {
   display: flex;
   flex-direction: column;
