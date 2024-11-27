@@ -1,0 +1,178 @@
+#drivers-options{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  
+}
+
+.map-container {
+  background-color: #F3F4F6;
+  width: 50rem;
+  height: 37.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#map-img{
+  width: 50rem;
+  height: 33.5rem;
+}
+
+@media (max-width: 1024px) {
+  #map-img {
+    width: 80%; 
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  #map-img {
+    width: 70%; 
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #map-img {
+    width: 65%; 
+    height: auto;
+  }
+}
+
+#drivers-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  max-height: 26.25rem;
+  margin: .625rem;
+  padding: .625rem;
+  overflow-y: scroll;
+
+}
+
+#cards-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 300px;
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  #cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .driver-card {
+    height: 310px;
+  }
+}
+
+@media (max-width: 768px) {
+  #cards-container {
+    grid-template-columns: repeat(1, 0.8fr); 
+  }
+  .driver-card {
+    height: 310px;
+  }
+  
+}
+
+.driver-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: relative;
+  min-height: 300px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.driver-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.card-value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #07A776;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.card-body {
+  flex: 1;
+  margin-top: 0.4rem;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.vehicle-text {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color:#1C1A37;
+}
+
+.card-vehicle,
+.card-review {
+  font-size: 0.875rem;
+  color: #888;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-review {
+  height: 100px;
+  max-height: 110px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.card-review::-webkit-scrollbar {
+  display: none;
+}
+
+.card-text {
+  word-spacing: 3px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.card-btn {
+  color: #fff;
+  border: none;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+

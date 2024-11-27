@@ -2,19 +2,37 @@
   "name": "back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.ts",
+  "engines": {
+    "node": "v22.11.0"
+  },
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch ."
+    "start": "node --watch --experimental-strip-types .",
+    "table": "node --loader ts-node/esm ./src/models/createTables.ts",
+    "seed": "node --loader ts-node/esm ./src/seeds/seedDrivers.ts",
+    "seed:reviews": "node --loader ts-node/esm ./src/seeds/seedReviews.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/polyline": "^1.2.1",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mysql2": "^3.11.4",
     "sequelize": "^6.37.5"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/google.maps": "^3.58.1",
+    "@types/mapbox__polyline": "^1.0.5",
+    "@types/node": "^22.9.1",
+    "@types/sequelize": "^4.28.20",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   }
 }

@@ -1,0 +1,53 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  font-family: Lato, Calibri, sans-serif;
+  background-color: #F5F7FA;
+}
+
+
+button {
+  width: 100%; 
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: #2563EB;
+  color: #FFFFFF;
+  border-radius: .625rem;
+  transition: background-color 0.2s;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1D4ED8;
+  }
+
+  &:active {
+    transform: none;
+  }
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+a {
+  color: inherit;
+}
+
+.tittle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem .625rem;
+  color: #060937;
+}
+

@@ -1,0 +1,79 @@
+name: shopper-test
+
+services:
+  db:
+    image: mysql:latest
+    container_name: db_shopper
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: travels_db
+      MYSQL_USER: travel
+      MYSQL_PASSWORD: travel
+    volumes:
+      - data:/data/db_shopper
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      interval: 30s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    networks:
+      - db-network
+
+  back:
+    build: ./back
+    container_name: back_shopper
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT= 8080
+    env_file:
+      - .env
+    volumes:
+      - ./back:/app
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    command: >
+      sh -c "
+      npm install &&
+      npm run table &&
+      npm run seed &&
+      npm run seed:reviews &&
+      npm start
+      "
+    networks:
+      - db-network
+      - front-network
+
+  front:
+    build: ./front
+    container_name: front_shopper
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    environment:
+      - PORT=80
+    volumes:
+      - ./front:/app
+    depends_on:
+      back:
+        condition: service_started
+    command: sh -c "npm install && npm run dev"
+    networks:
+      - front-network
+
+
+networks:
+  db-network:
+    driver: bridge
+  front-network:
+    driver: bridge
+
+volumes:
+  data:
