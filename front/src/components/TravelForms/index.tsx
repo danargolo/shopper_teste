@@ -79,12 +79,16 @@ export const TravelForms = (): React.JSX.Element => {
 
       const response = await apiRequest("/ride/estimate", "POST", formData);
 
+      const staticMap = await apiRequest("/map", "GET");
+      
       setDataResponse({
         customer_id: formData.customer_id,
         input_origin: formData.origin,
         input_destination: formData.destination,
         ...response.data,
+        staticMap
       });
+     
 
       setIsLoading({ signal: false });
       setCurrentRender("options");

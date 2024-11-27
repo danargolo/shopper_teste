@@ -8,7 +8,7 @@ import { CustomError } from "../utils/customError.ts";
 import { formatRideResponse } from "../utils/formatRideResponse.ts";
 
 export const estimateService = async (_customer_id: string, origin: string, destination: string) => {
-  const route: any = await routesApi(origin, destination);  
+  const route: any = await routesApi(origin, destination);   
 
   const { distance, duration, routeResponse, ...remainingRoute } = route;
   
@@ -27,18 +27,20 @@ export const estimateService = async (_customer_id: string, origin: string, dest
 
   const driverUpdated = addValueToDrivers(filteredDrivers, parseDistance);
 
-  const staticMap = await mapStaticAPI(routeResponse, routeResponse.polyline);
+  // const staticMap = await mapStaticAPI(routeResponse, routeResponse.polyline);
+  await mapStaticAPI(routeResponse, routeResponse.polyline);
   
   const formatedResponse = {
     ...remainingRoute,
-    distance: parseDistance,
+    distance,
     duration,
     options: driverUpdated,
-    routeResponse: {
-      staticMap,
-      ...routeResponse
-    }
-  }
+    routeResponse
+    // routeResponse: {
+    //   staticMap,
+    //   ...routeResponse
+    // }
+  } 
 
   return formatedResponse;
 };

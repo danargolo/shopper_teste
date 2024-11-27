@@ -31,11 +31,12 @@ interface RequestBodyInterface {
 
 export const TravelOptions = (): React.JSX.Element => {
   const { setCurrentRender, setIsLoading, dataResponse, setThrowError, throwError } = useRenderContext();
-
+  console.log(dataResponse);
+  
   const { options } = dataResponse;
     
   const handleClick = async (driver: DriversInterface) => {
-    try {
+    try {     
 
       setIsLoading({signal:true});
 
@@ -73,7 +74,7 @@ export const TravelOptions = (): React.JSX.Element => {
   return (
     <div className="drivers-options">
       <div className="map-container">
-        <img src={dataResponse.routeResponse.staticMap} alt='Route Map Static'/>
+        <img src={dataResponse.staticMap.data} alt='Route Map Static'/>
       </div>
       <h3 className="tittle">Motoristas Disponíveis</h3>
 
