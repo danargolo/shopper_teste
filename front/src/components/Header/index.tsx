@@ -8,7 +8,7 @@ export const Header = (): React.JSX.Element => (
       </div>
       <div id='register'>
         <p>É motorista?</p>
-        <button id='btn-register'> Cadastre-se AQUI</button>
+        <button id='btn-register' disabled> Cadastre-se AQUI</button>
       </div>
       <nav>
         <ul className="flex space-x-6">
