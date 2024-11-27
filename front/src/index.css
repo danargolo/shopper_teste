@@ -6,3 +6,38 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: Lato, Calibri, sans-serif;
+}
+
+
+button {
+  width: 100%; 
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: #2563EB;
+  color: #FFFFFF;
+  border-radius: .625rem;
+  transition: background-color 0.2s;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1D4ED8;
+  }
+
+  &:active {
+    transform: none;
+  }
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+a {
+  color: inherit;
+}
+

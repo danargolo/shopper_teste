@@ -15,7 +15,7 @@ export const ErrorHandler = (): React.JSX.Element => {
         <h3>Ocorreu um erro</h3>
         <p>{throwError}</p>
         <button className="close-btn" onClick={() => setThrowError("")}>
-          Fechar
+          Tentar novamente
         </button>
       </div>
     </div>
