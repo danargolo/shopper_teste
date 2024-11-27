@@ -14,6 +14,15 @@ export interface Driver extends mysql.RowDataPacket {
   created_at: Date;
 }
 
+interface DriverInput {
+  id: number;
+  name: string;
+  description: string;
+  vehicle: string;
+  rate: string;
+  min_distance: number;
+}
+
 export const driveModel = async (distance:number): Promise<interf.FormattedDriver[] | null>  => {
   try {
     const query = `SELECT 
@@ -93,4 +102,28 @@ export const getAllDrivers = async () => {
   } catch (error: any) {
     throw CustomError(error.sqlMessage, 500, error.code);
   }
+}
+
+export const postDriverModel = async (driver: DriverInput): Promise<any> => {
+  
+    const values = `('${driver.name}', '${driver.description}', '${driver.vehicle}', 
+        '${driver.rate}', '${driver.min_distance}')`
+
+  
+    const query = `
+      INSERT INTO drivers (name, description, vehicle, rate, min_distance)
+      VALUES ${values};
+    `;
+
+    try {
+      const connection = await getConnection();
+      await connection.query(query);
+  
+      connection.release()
+      return ;
+  
+    } catch (error: any) {
+      throw CustomError(error.sqlMessage, 500, error.code);
+    }
+  
 }
