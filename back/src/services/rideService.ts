@@ -28,9 +28,6 @@ export const estimateService = async (_customer_id: string, origin: string, dest
   const driverUpdated = addValueToDrivers(filteredDrivers, parseDistance);
 
   const staticMap = await mapStaticAPI(routeResponse, routeResponse.polyline);
-
-  // console.log(staticMap);
-  
   
   const formatedResponse = {
     ...remainingRoute,

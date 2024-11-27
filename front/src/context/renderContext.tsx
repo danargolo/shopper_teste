@@ -11,6 +11,8 @@ interface RenderContextInterface {
   setIsLoading: (value: IsLoading) => void;
   dataResponse: any;
   setDataResponse: (value: boolean) => void;
+  throwError: string;
+  setThrowError: (value: string) => void;
 }
 
 const RenderContext = createContext<RenderContextInterface | undefined>(undefined);
@@ -22,14 +24,15 @@ export const RenderProvider = ({children}: { children: ReactNode }) => {
     message: "Carregando..."
   });
   const [ dataResponse, setDataResponse ] = useState({});
+  const [ throwError, setThrowError ] = useState('')
 
   const contextValue  = useMemo(() => {
     return {
       currentRender, setCurrentRender, isLoading, setIsLoading,
-      dataResponse, setDataResponse
+      dataResponse, setDataResponse, throwError, setThrowError
     };
   }, [currentRender, setCurrentRender, isLoading, setIsLoading,
-      dataResponse, setDataResponse  ]);
+      dataResponse, setDataResponse, throwError, setThrowError ]);
 
   return (
     <RenderContext.Provider value={contextValue}>

@@ -61,6 +61,22 @@ form {
   }
 }
 
+.input-error {
+  border: 1px solid red;
+}
+
+.error-hide {
+  visibility: hidden; 
+  height: 10px;
+}
+
+.error-visible {
+  visibility: visible;
+  color: red;
+  font-size: 12px;
+  height: 10px; 
+}
+
 .formTravelBtn {
   width: 100%; 
   margin-top: 1rem;
