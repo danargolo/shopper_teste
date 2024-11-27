@@ -3,6 +3,7 @@ import { apiRequest } from "../../services/apiRequest";
 import "./styles.css";
 import { useRenderContext } from "../../context/renderContext";
 import { ErrorHandler } from "../ErrorHandler";
+import { formatCurrency } from "../../utils/formatCurrency";
 
 interface DriversInterface {
   id: number;
@@ -107,11 +108,11 @@ export const TravelHistory = (): React.JSX.Element => {
   };
 
   return (
-    <div className="history-container">
+    <div id="history-container">
       <h2 className="tittle">Histórico de Viagens</h2>
       <div className="data-container">
         <div className="inputs-container">
-          <div className="flex-1">
+          <div className="input-class">
             <input
               type="text"
               id="historyId"
@@ -124,7 +125,7 @@ export const TravelHistory = (): React.JSX.Element => {
               aria-label="User ID"
             />
           </div>
-          <div className="flex-1">
+          <div className="input-class">
             <select
               name="selectedDriver"
               className="history-input"
@@ -140,6 +141,7 @@ export const TravelHistory = (): React.JSX.Element => {
             </select>
           </div>
           <button
+            id="btn-history"
             className="history-btn"
             onClick={(e) => {
               handleClick(e);
@@ -175,7 +177,7 @@ export const TravelHistory = (): React.JSX.Element => {
                       </td>
                       <td className="data-table">{trip.distance}</td>
                       <td className="data-table">{trip.duration}</td>
-                      <td className="data-table medium-bold">${trip.value}</td>
+                      <td className="data-table medium-bold">{formatCurrency(trip.value)}</td>
                     </tr>
                   )
                 ) : 
