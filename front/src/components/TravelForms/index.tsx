@@ -76,7 +76,7 @@ export const TravelForms = (): React.JSX.Element => {
     // if (!validateForm()) return;
 
     try {
-      setIsLoading({ signal: true, message: "Calculando a melhor rota..." });
+      setIsLoading({ signal: true, message: "Calculando rota..." });
 
       const response = await apiRequest("/ride/estimate", "POST", formData);
 
