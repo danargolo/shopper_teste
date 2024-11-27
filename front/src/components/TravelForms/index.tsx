@@ -104,8 +104,9 @@ export const TravelForms = (): React.JSX.Element => {
   return (
     <>
       <Hero />
-      <div className="form-travel-container">
-        <h2 className="tittle">Travel Request</h2>
+      <section id="travel-forms">
+      <div id="form-travel-container">
+        <h2 className="tittle">Solicite sua viagem</h2>
         <form>
           <div>
             <label htmlFor="customer_id">ID Usuário</label>
@@ -181,6 +182,7 @@ export const TravelForms = (): React.JSX.Element => {
           </button>
         </form>
       </div>
+      </section>
       {throwError && <ErrorHandler />}
     </>
   );

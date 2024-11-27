@@ -2,12 +2,14 @@ import "./App.css";
 import { Header } from "./components/Header";
 import { RenderComponent } from "./components/RenderComponent";
 import { Loader } from "./components/Loader";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
     <>
       <Header />
       <RenderComponent />
+      <Footer />
       {/* <Routes>
         <Route path="/" element={<TravelForms />} />
         <Route path="/travel" element={<TravelOptions />} />

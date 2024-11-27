@@ -1,3 +1,13 @@
+#travel-forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+
+
 label {
   display: block;
   font-size: 0.875rem;
@@ -5,20 +15,10 @@ label {
   color: #4B5563;
 }
 
-/* input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield;
-} */
-
-
 form {
   display: flex;
   flex-direction: column;
+  min-height: 350px;
   gap: 1rem;
 
   & > div {
@@ -28,21 +28,29 @@ form {
   }
 }
 
-.tittle {
+/* .tittle {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: #1F2937;
-}
+  color: #060937;
+} */
 
-.form-travel-container {
-  width: 842.4px;
+#form-travel-container {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
   height: 366px;
   background-color: #FFFFFF;
   padding: 1.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
 
+}
+
+@media (max-width: 780px) {
+  #form-travel-container {
+    width: 60%;
+  }
 }
 
 .input-travel {
