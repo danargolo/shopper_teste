@@ -27,7 +27,6 @@ export const estimateService = async (_customer_id: string, origin: string, dest
 
   const driverUpdated = addValueToDrivers(filteredDrivers, parseDistance);
 
-  // const staticMap = await mapStaticAPI(routeResponse, routeResponse.polyline);
   await mapStaticAPI(routeResponse, routeResponse.polyline);
   
   const formatedResponse = {
@@ -36,10 +35,6 @@ export const estimateService = async (_customer_id: string, origin: string, dest
     duration,
     options: driverUpdated,
     routeResponse
-    // routeResponse: {
-    //   staticMap,
-    //   ...routeResponse
-    // }
   } 
 
   return formatedResponse;

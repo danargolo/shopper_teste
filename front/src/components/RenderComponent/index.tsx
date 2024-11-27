@@ -15,7 +15,6 @@ export const RenderComponent = () => {
   const { currentRender, isLoading } = useRenderContext();
 
   return (
-    // <Loader />
     isLoading.signal ? <Loader /> : objectMapComponents[currentRender]
   )
 }

@@ -35,10 +35,6 @@ export const TravelForms = (): React.JSX.Element => {
     validateForm();
   }, [formData]);
 
-  // useEffect(() => {
-  //   setIsLoading({ signal: false });
-  // }, [throwError]);
-
   const validateForm = (): boolean => {
     const errors: any = {};
     let isValid = true;
@@ -47,16 +43,6 @@ export const TravelForms = (): React.JSX.Element => {
       errors.customer_id = "O ID deve conter apenas números.";
       isValid = false;
     }
-
-    // if (!formData.origin.trim()) {
-    //   errors.origin = "O endereço de origem é obrigatório.";
-    //   isValid = false;
-    // }
-
-    // if (!formData.destination.trim()) {
-    //   errors.destination = "O endereço de destino é obrigatório.";
-    //   isValid = false;
-    // }
 
     setFormErrors(errors);
     return isValid;
@@ -73,7 +59,6 @@ export const TravelForms = (): React.JSX.Element => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // if (!validateForm()) return;
 
     try {
       setIsLoading({ signal: true, message: "Calculando rota..." });

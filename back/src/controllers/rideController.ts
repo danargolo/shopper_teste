@@ -4,7 +4,6 @@ import { confirmService, estimateService, rideHistoryService } from "../services
 export const estimateController = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const { customer_id, origin, destination } = req.body;
-    console.log('bateu no controller');
     
     const response = await estimateService(customer_id, origin, destination); 
 

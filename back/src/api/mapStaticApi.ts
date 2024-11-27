@@ -40,6 +40,8 @@ export const mapStaticAPI = async ( routeResponse:any, encoded:any ): Promise< a
   
   
     const response = await axios.get(url, { responseType: 'arraybuffer' });
+
+    
     const base64 = Buffer.from(response.data, 'binary').toString('base64');
 
     const dataBase64 = `data:image/png;base64,${base64}`;
@@ -47,7 +49,8 @@ export const mapStaticAPI = async ( routeResponse:any, encoded:any ): Promise< a
     await postMapStaticApi(dataBase64, startLat);
     
   } catch (error: any) {
-    throw CustomError(error.response.statusText,error.response.status, error.code )
+    console.log(error)
+    throw CustomError("Erro ao carregar mapa",500, error.code )
     
   }
 
