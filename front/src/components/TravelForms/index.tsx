@@ -34,9 +34,9 @@ export const TravelForms = (): React.JSX.Element => {
     validateForm();
   }, [formData]);
 
-  useEffect(() => {
-    setIsLoading({ signal: false });
-  }, [throwError]);
+  // useEffect(() => {
+  //   setIsLoading({ signal: false });
+  // }, [throwError]);
 
   const validateForm = (): boolean => {
     const errors: any = {};
@@ -93,7 +93,6 @@ export const TravelForms = (): React.JSX.Element => {
 
       const errorMessage = error.response.data.error_description;
       setThrowError(errorMessage);
-      console.log(errorMessage);
     }
   };
 
@@ -118,7 +117,6 @@ export const TravelForms = (): React.JSX.Element => {
           />
           <div className={ formErrors.customer_id && (formData.customer_id.trim() !== "")
             ? "error-visible" : "error-hide" }><p>{formErrors.customer_id}</p></div>
-          {/* <p className="error-text">{formErrors.customer_id}</p> */}
         </div>
         <div>
           <label htmlFor="origin">Endereço de Origem</label>

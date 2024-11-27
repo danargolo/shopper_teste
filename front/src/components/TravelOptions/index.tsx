@@ -2,7 +2,7 @@ import './styles.css';
 import { useRenderContext } from '../../context/renderContext';
 import { useState } from 'react';
 import { apiRequest } from '../../services/apiRequest';
-import StaticMapComponent from '../StaticMap';
+import { ErrorHandler } from '../ErrorHandler';
 
 interface DriversInterface {
   id: number;
@@ -30,37 +30,44 @@ interface RequestBodyInterface {
 }
 
 export const TravelOptions = (): React.JSX.Element => {
-  const { setCurrentRender, setIsLoading, dataResponse } = useRenderContext();
-  // const { staticMap, setStaticMap } = useState('');
+  const { setCurrentRender, setIsLoading, dataResponse, setThrowError, throwError } = useRenderContext();
 
   const { options } = dataResponse;
-
-  // console.log(dataResponse);  
     
   const handleClick = async (driver: DriversInterface) => {
-    setIsLoading({signal:true});
+    try {
 
-    const rideDataConfirm = {
-      customer_id: dataResponse.customer_id, 
-      origin: dataResponse.input_origin,
-      destination: dataResponse.input_destination,
-      distance: dataResponse.distance,
-      duration: dataResponse.duration,
-      driver: {
-        id: driver.id,
-        name: driver.name,
-      },
-      value: driver.value,
-    };  
+      setIsLoading({signal:true});
 
-    await apiRequest(
-      "/ride/confirm",
-      "PATCH",
-      rideDataConfirm
-    )    
+      const rideDataConfirm = {
+        customer_id: dataResponse.customer_id, 
+        origin: dataResponse.input_origin,
+        destination: dataResponse.input_destination,
+        distance: dataResponse.distance,
+        duration: dataResponse.duration,
+        driver: {
+          id: driver.id,
+          name: driver.name,
+        },
+        value: driver.value,
+      };  
+  
+      await apiRequest(
+        "/ride/confirm",
+        "PATCH",
+        rideDataConfirm
+      )    
+  
+      setCurrentRender('history');
+      setIsLoading({signal: false})
+      
+    } catch ( error: any ) {
+      setIsLoading({ signal: false });
 
-    setCurrentRender('history');
-    setIsLoading({signal: false})
+      const errorMessage = error.response.data.error_description;
+      setThrowError(errorMessage);
+      
+    }
   }
 
   return (
@@ -97,6 +104,7 @@ export const TravelOptions = (): React.JSX.Element => {
         ))
       ): 
       (<p>Sem motoristas disponiveis no momento.</p>)}
+      {throwError && <ErrorHandler />}
     </div>
   );
 };

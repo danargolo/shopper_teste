@@ -1,5 +1,6 @@
 import axios from "axios";
 import polyline from "@mapbox/polyline";
+import { CustomError } from "../utils/customError.ts";
 // import { CustomError } from "../utils/customError.ts";
 
 
@@ -47,8 +48,7 @@ export const mapStaticAPI = async ( routeResponse:any, encoded:any ): Promise< a
     return dataBase64;
     
   } catch (error: any) {
-    // throw CustomError(error.message,error.status, error.code )
-    console.error((error));
+    throw CustomError(error.response.statusText,error.response.status, error.code )
     
   }
 

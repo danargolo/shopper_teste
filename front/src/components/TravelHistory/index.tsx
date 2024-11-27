@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { apiRequest } from "../../services/apiRequest";
 import "./styles.css";
 import { useRenderContext } from "../../context/renderContext";
+import { ErrorHandler } from "../ErrorHandler";
 
 interface DriversInterface {
   id: number;
@@ -35,28 +36,42 @@ interface HistoryInputInterface {
 export const TravelHistory = (): React.JSX.Element => {
   const [drivers, setDrivers] = useState<DriversInterface[]>([]);
   const [dataInput, setDataInput] = useState<HistoryInputInterface>({
-    historyId: "",
+    historyId: " ",
     selectedDriver: ""
   });
   const [ ridesHistory, setRidesHistory] = useState<HistoryInterface[]>([])
-  const { setIsLoading } = useRenderContext();
+  const { setIsLoading, throwError, setThrowError } = useRenderContext();
 
   const loadDrivers = async () => {
     try {
       const response = await apiRequest("/drivers", "GET");
       setDrivers(response.data);
-    } catch (error) {
-      console.error("Erro ao carregar motoristas:", error);
+    } catch (error: any) {
+      const errorMessage = error.response.data.error_description;
+      setThrowError(errorMessage);
+      console.error(error);
     } finally {
       setIsLoading({ signal: false });
     }
   };
 
-  useEffect(() => {}, [ridesHistory]);
-
   useEffect(() => {
     loadDrivers();
   }, []);
+
+  useEffect(() => {}, [ridesHistory]);
+
+  const validateInputs = (): boolean => {
+    let isValid = true;
+
+    if (!dataInput.historyId.trim()) {
+      setThrowError("Os dados fornecidos no corpo da requisição são inválidos");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -66,23 +81,30 @@ export const TravelHistory = (): React.JSX.Element => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // setIsLoading({signal:true, message:"Buscando motoristas..."});
 
-    const response = await apiRequest(
-      `/ride/${dataInput.historyId}`,
-      "GET",
-      {},
-      {driver_id: dataInput.selectedDriver}
+    if (!validateInputs()) return;
 
-    );
+    try {
 
-    const { rides } = response.data;
-    console.log(rides);
-    
-
-    setRidesHistory(rides);
-    // setIsLoading({signal:false});
-
+      const response = await apiRequest(
+        `/ride/${dataInput.historyId}`,
+        "GET",
+        {},
+        {driver_id: dataInput.selectedDriver}
+  
+      );
+  
+      const { rides } = response.data;
+      console.log(rides);
+      
+  
+      setRidesHistory(rides);
+      
+    } catch (error: any) {
+      const errorMessage = error.response.data.error_description;
+      setThrowError(errorMessage);
+      
+    }
     
   };
 
@@ -159,12 +181,15 @@ export const TravelHistory = (): React.JSX.Element => {
                     </tr>
                   )
                 ) : 
-                (<tr>Sem histórico de viagens para exibir.</tr> )
+                (<tr>
+                  <td></td>
+                </tr> )
                }
             </tbody>
           </table>
         </div>
       </div>
+      {throwError && <ErrorHandler />}
     </div>
   );
 };

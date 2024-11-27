@@ -4,14 +4,18 @@ import { CustomError } from '../utils/customError.ts';
 export const validateParams = (req: express.Request, _res: express.Response, next: express.NextFunction) => {
   try {
     const { customer_id } = req.params;
+    console.log('testes');
+    
+    console.log(typeof customer_id);
+    
     const { driver_id } = req.query;
 
-    if (!customer_id || customer_id.trim() === '') {
+    if (customer_id === null || !customer_id || typeof customer_id !== 'string' || customer_id.trim() === '') {
       throw CustomError(
-        'Os dados fornecidos na requisição são inválidos',
+        'Os dados fornecidos no corpo da requisição são inválidos',
         400, 
-        'INVALID_DATA'
-      )
+        'INVALID_DATA',
+      );
     }
     
     if (driver_id && (typeof driver_id !== 'string' || driver_id.trim() === '')) {
