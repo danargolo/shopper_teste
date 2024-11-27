@@ -8,7 +8,9 @@ function App() {
   return (
     <>
       <Header />
-      <RenderComponent />
+      <div id="container-component">
+        <RenderComponent />
+      </div>
       <Footer />
       {/* <Routes>
         <Route path="/" element={<TravelForms />} />

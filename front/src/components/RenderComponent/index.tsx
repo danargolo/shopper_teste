@@ -12,9 +12,10 @@ const objectMapComponents: { [key: string]: JSX.Element } = {
 }
 
 export const RenderComponent = () => {
-  const { currentRender, isLoading } = useRenderContext();
+  // const { currentRender, isLoading } = useRenderContext();
 
   return (
-    isLoading.signal ? <Loader /> : objectMapComponents[currentRender]
+    <Loader />
+    // isLoading.signal ? <Loader /> : objectMapComponents[currentRender]
   )
 }

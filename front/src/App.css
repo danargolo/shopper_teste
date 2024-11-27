@@ -1,3 +1,7 @@
 #root {
  width: 100%;
 }
+
+#container-component {
+  height: 100vh;
+}

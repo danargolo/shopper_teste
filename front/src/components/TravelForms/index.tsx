@@ -109,7 +109,7 @@ export const TravelForms = (): React.JSX.Element => {
         <h2 className="tittle">Solicite sua viagem</h2>
         <form>
           <div>
-            <label htmlFor="customer_id">ID Usuário</label>
+            <label id="label-forms" htmlFor="customer_id">ID Usuário</label>
             <input
               type="text"
               id="customer_id"
@@ -135,7 +135,7 @@ export const TravelForms = (): React.JSX.Element => {
             </div>
           </div>
           <div>
-            <label htmlFor="origin">Endereço de Origem</label>
+            <label id="label-forms" htmlFor="origin">Endereço de Origem</label>
             <input
               type="text"
               id="origin"
@@ -153,7 +153,7 @@ export const TravelForms = (): React.JSX.Element => {
             )}
           </div>
           <div>
-            <label htmlFor="destination">Endereço de Destino</label>
+            <label id="label-forms" htmlFor="destination">Endereço de Destino</label>
             <input
               type="text"
               id="destination"
@@ -172,7 +172,7 @@ export const TravelForms = (): React.JSX.Element => {
           </div>
           <button
             type="submit"
-            className="formTravelBtn"
+            id="btn-estimate"
             onClick={(e) => {
               handleClick(e);
             }}
