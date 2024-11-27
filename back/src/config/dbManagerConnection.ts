@@ -1,5 +1,4 @@
 import mysql from 'mysql2/promise';
-//erro 503, tratar aqui
 
 export const dbConfig = {
   host: process.env.DB_HOST ?? 'db',

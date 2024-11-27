@@ -23,12 +23,6 @@ const driversInsertQuery = generateDriversQuery(Drivers);
 
 const seedDatabase = async () => {
   const connection = await getConnection();
-//   const query = `
-//   SET FOREIGN_KEY_CHECKS = 0;
-//   TRUNCATE TABLE drivers;
-  
-//   SET FOREIGN_KEY_CHECKS = 1;
-// `;
 
   try {
     await connection.query("SET FOREIGN_KEY_CHECKS = 0;");
