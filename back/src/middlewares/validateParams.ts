@@ -4,9 +4,7 @@ import { CustomError } from '../utils/customError.ts';
 export const validateParams = (req: express.Request, _res: express.Response, next: express.NextFunction) => {
   try {
     const { customer_id } = req.params;
-    console.log('testes');
     
-    console.log(typeof customer_id);
     
     const { driver_id } = req.query;
 

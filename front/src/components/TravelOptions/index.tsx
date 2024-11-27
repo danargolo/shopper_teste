@@ -31,7 +31,6 @@ interface RequestBodyInterface {
 
 export const TravelOptions = (): React.JSX.Element => {
   const { setCurrentRender, setIsLoading, dataResponse, setThrowError, throwError } = useRenderContext();
-  console.log(dataResponse);
   
   const { options } = dataResponse;
     

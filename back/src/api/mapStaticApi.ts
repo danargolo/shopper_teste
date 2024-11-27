@@ -43,10 +43,8 @@ export const mapStaticAPI = async ( routeResponse:any, encoded:any ): Promise< a
     const base64 = Buffer.from(response.data, 'binary').toString('base64');
 
     const dataBase64 = `data:image/png;base64,${base64}`;
-    console.log('gerou base64 map');
     
     await postMapStaticApi(dataBase64, startLat);
-
     
   } catch (error: any) {
     throw CustomError(error.response.statusText,error.response.status, error.code )
@@ -56,8 +54,11 @@ export const mapStaticAPI = async ( routeResponse:any, encoded:any ): Promise< a
 } 
 
 const postMapStaticApi = async (dataBase64: any, startLat: string): Promise<any> => {
-  
-  const baseURL =`http://localhost:8080/map/saveStaticMap/${startLat}`;
-  await axios.post(baseURL, {dataBase64});
-
+  try {
+    const baseURL =`http://localhost:8080/map/saveStaticMap/${startLat}`;
+    await axios.post(baseURL, {dataBase64});
+  } catch (error: any) {
+    throw CustomError("Erro api /POST map", error.response.status, error.code)
+    
+  }
 }

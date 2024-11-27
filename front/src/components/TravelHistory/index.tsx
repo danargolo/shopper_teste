@@ -94,9 +94,7 @@ export const TravelHistory = (): React.JSX.Element => {
   
       );
   
-      const { rides } = response.data;
-      console.log(rides);
-      
+      const { rides } = response.data;      
   
       setRidesHistory(rides);
       
