@@ -1,6 +1,8 @@
 # Viagem Fácil 
 
 Este projeto é uma aplicação fullstack desenvolvida para estimativa de viagens, cálculo de rotas e exibição de mapa estático. Ele utiliza a integração com APIs do Google Maps para fornecer uma experiência rica em funcionalidades.
+
+![Tela Projeto](./front/src/assets/tela.jpg)
 -----
 
 ## Visão Geral
